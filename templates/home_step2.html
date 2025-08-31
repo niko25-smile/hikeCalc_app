@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="POST" id="plan-form">
+  <h3 class="section-title">山行計画　詳細</h3>
+  {% for i in range(1, days + 1) %}
+    <h3>{{ i }}日目</h3>
+
+    <label>行動時間（時間）:</label>
+    <input type="number" step="0.1" name="course_{{ i }}" required><br>
+
+    <label>食事:</label>
+    <div class="toggle-group" data-group="meals_{{ i }}">
+      {% if i != 1 %}
+        <button type="button" class="toggle-button" data-name="meals_{{ i }}" data-value="breakfast">朝食</button>
+      {% endif %}
+      <button type="button" class="toggle-button" data-name="meals_{{ i }}" data-value="lunch">昼食</button>
+      {% if i != days %}
+        <button type="button" class="toggle-button" data-name="meals_{{ i }}" data-value="dinner">夕食</button>
+      {% endif %}
+    </div>
+
+    <div class="toggle-group" data-group="options_{{ i }}">
+      {% if i < days %}
+        <button type="button" class="toggle-button" data-name="hut_{{ i }}" data-value="1">小屋泊(夕食付)</button>
+        <button type="button" class="toggle-button" data-name="water_{{ i }}" data-value="1">水場あり</button>
+      {% endif %}
+    </div>
+
+    <hr>
+  {% endfor %}
+  <button type="submit">次へ</button>
+</form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('plan-form');
+
+    // ボタン選択時の処理
+    document.querySelectorAll('.toggle-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const name = button.dataset.name;
+        const value = button.dataset.value;
+
+        // トグルON/OFF
+        if (button.classList.contains('selected')) {
+          button.classList.remove('selected');
+          form.querySelector(`input[name="${name}"][value="${value}"]`)?.remove();
+        } else {
+          button.classList.add('selected');
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = name;
+          input.value = value;
+          form.appendChild(input);
+        }
+      });
+    });
+  });
+</script>
+{% endblock %}

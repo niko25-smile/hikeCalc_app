@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>体重・属性を入力してください</h2>
+  <form method="POST">
+      <!-- 体重 -->
+      <label for="weight">体重（kg）:</label>
+      <input
+        type="number"
+        id="weight"
+        name="weight"
+        step="0.1"
+        min="1"
+        required
+        placeholder="例: 60.0"
+        value="{{ weight }}"
+      >
+
+      <!-- 性別 -->
+      <label>性別:</label>
+      <div class="toggle-group" style="margin-bottom: 1rem;">
+        <label style="margin-right:1rem;">
+          <input type="radio" name="gender" value="male" {% if gender == 'male' %}checked{% endif %}> 男性
+        </label>
+        <label>
+          <input type="radio" name="gender" value="female" {% if gender == 'female' %}checked{% endif %}> 女性
+        </label>
+      </div>
+
+      <!-- 年齢階級 -->
+      <label for="age_group">年齢階級:</label>
+      <select id="age_group" name="age_group" required style="max-width:250px; padding:0.4rem;">
+        <option value="15-29" {% if age_group == '15-29' %}selected{% endif %}>15〜29歳</option>
+        <option value="30-39" {% if age_group == '30-39' %}selected{% endif %}>30〜39歳</option>
+        <option value="40-49" {% if age_group == '40-49' %}selected{% endif %}>40〜49歳</option>
+        <option value="50-59" {% if age_group == '50-59' %}selected{% endif %}>50〜59歳</option>
+        <option value="60-"   {% if age_group == '60-' %}selected{% endif %}>60歳以上</option>
+      </select>
+
+      <!-- 体格（筋力量） -->
+      <label style="margin-top:1rem;">体格（筋力量）:</label>
+      <div class="toggle-group" style="margin-bottom: 1.5rem;">
+        <label style="margin-right:1rem;">
+          <input type="radio" name="muscle" value="muscular" {% if muscle == 'muscular' %}checked{% endif %}> 筋肉質
+        </label>
+        <label style="margin-right:1rem;">
+          <input type="radio" name="muscle" value="normal" {% if muscle == 'normal' %}checked{% endif %}> 標準
+        </label>
+        <label>
+          <input type="radio" name="muscle" value="cultural" {% if muscle == 'cultural' %}checked{% endif %}> 文化系
+        </label>
+      </div>
+
+      <input type="submit" value="次へ進む">
+  </form>
+{% endblock %}

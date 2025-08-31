@@ -1,0 +1,14 @@
+body {
+    font-family: sans-serif;
+    margin: 20px;
+}
+header {
+    background-color: #f0f0f0;
+    padding: 10px;
+}
+nav a {
+    margin-right: 15px;
+}
+main {
+    margin-top: 20px;
+}

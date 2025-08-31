@@ -1,0 +1,161 @@
+/* base.css */
+
+/* 全体の基本スタイル */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f7f2;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* ヘッダー部分 */
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1rem 2rem;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+nav {
+    margin-top: 0.5rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* サブタイトル */
+.subtitle {
+    color: white;
+    font-weight: normal;
+    margin-top: 0.2rem;
+    font-size: 1rem;
+    text-align: center;
+    
+}
+
+/* セレクションタイトル */
+.section-title {
+    border-bottom: 2px solid #c8e6c9;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    color: #2e7d32;
+    position: relative;
+}
+
+/* コンテンツエリア */
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+/* 日数選択ボタン（横並び・薄色→選択時に濃色） */
+.day-buttons {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+}
+
+.day-button {
+    flex: 1;
+    padding: 0.8rem;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #c8e6c9;  /* 初期は薄緑 */
+    color: #2e7d32;
+    border: 2px solid #a5d6a7;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.day-button:hover {
+    background-color: #a5d6a7;
+}
+
+.day-button.selected {
+    background-color: #4CAF50;  /* 選択時は濃い緑 */
+    color: white;
+    border-color: #388e3c;
+}
+
+
+/* フォーム要素の整形（必要に応じて） */
+form label {
+    display: block;
+    margin: 1rem 0 0.5rem;
+    font-weight: bold;
+}
+
+form input, form select {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.8rem 1.5rem;   /* ← userと同じ余白 */
+    font-size: 1.1rem;        /* ← userと同じ文字サイズ */
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;       /* ← userと同じ角丸 */
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+form input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+form input[type="number"] {
+    width: 100%;
+    max-width: 250px;
+    padding: 0.6rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    box-sizing: border-box;
+}
+
+
+/* 見出しや小見出しの調整 */
+h2, h3 {
+    color: #2e7d32;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 600px) {
+    main {
+        margin: 1rem;
+        padding: 1rem;
+    }
+}

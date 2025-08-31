@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>HikeClac</title>
+    {% if css_file %}
+      <link rel="stylesheet" href="{{ url_for('static', filename=css_file) }}">
+    {% endif %}
+</head>
+<body>
+    <header>
+        <h1>HikeCalc</h1>
+        <h3 class="subtitle">登山準備のための行動食＆水計算アプリ</h3>
+        <nav>
+            <a href="{{ url_for('home_step1') }}">ホーム</a> |
+            <a href="{{ url_for('user') }}">ユーザー設定</a> 
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

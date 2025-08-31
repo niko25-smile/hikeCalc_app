@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3 class="section-title">入山前に準備するもの（最低限）</h3>
+行動食: {{ total_intake_needed }} kcal<br>
+水: {{ total_water_needed }} ml　＋食事用の水<br>
+朝食: {{ breakfast_count }} 食分（400kcal×{{ breakfast_count }}）<br>
+昼食: {{ lunch_count }} 食分（400kcal×{{ lunch_count }}）<br>
+夕食: {{ dinner_count }} 食分（500kcal×{{ dinner_count }}）<br>
+
+
+{% if result|length > 1 %}
+  {% set meal_labels = {"breakfast": "朝食", "lunch": "昼食", "dinner": "夕食"} %}
+
+  <h3 class="section-title">詳細</h3>
+  
+  {% for day in result %}
+  
+    <h3>{{ loop.index }}日目</h3>
+    行動時間: {{ day.course_time }} 時間<br>
+    摂取する必要があるエネルギー: {{ day.intake_target }} kcal<br>
+
+    準備する食事エネルギー: {{ day.meal_kcal }} kcal 
+    （
+    {% set filtered_meals = day.meals | select('ne', 'dinner') | list %}
+    {% for meal in filtered_meals %}
+      {{ meal_labels[meal] }}{% if not loop.last %}, {% endif %}
+    {% endfor %}
+    {% if "dinner" in day.meals %}
+      {% if filtered_meals | length > 0 %}, {% endif %}
+      夕食
+    {% endif %}
+    ）<br>
+
+      準備する行動食エネルギー: {{ day.intake_needed }} kcal<br>
+      摂取する必要がある水の量: {{ day.required_water }} ml<br>
+      {% if loop.index > 1 and day.water_needed == 0 %}
+        準備する水の量: {{ day.required_water }} ml（現地調達）<br>
+      {% else %}
+        準備する水の量: {{ day.required_water }} ml<br>
+      {% endif %} <br>
+
+    <hr>
+  {% endfor %}
+{% endif %}
+
+<a href="{{ url_for('index') }}">
+  <button type="button">ホームに戻る</button>
+</a>
+{% endblock %}

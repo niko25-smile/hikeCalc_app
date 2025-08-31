@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>日数と荷物の重さを入力してください</h2>
+  <form method="POST">
+  <form method="POST" id="day-form">
+    <label>日数：</label>
+    <div class="day-buttons">
+      <button type="button" class="day-button" data-value="1">日帰り</button>
+      <button type="button" class="day-button" data-value="2">1泊2日</button>
+      <button type="button" class="day-button" data-value="3">2泊3日</button>
+      <button type="button" class="day-button" data-value="4">3泊4日</button>
+    </div>
+
+    <input type="hidden" name="days" id="days-input">
+
+    <label for="luggage">荷物（kg）：</label>
+    <input type="number" name="luggage" id="luggage" step="0.1" min="0" required>
+
+    <input type="submit" value="次へ">
+  </form>
+
+  <script>
+    const buttons = document.querySelectorAll(".day-button");
+    const input = document.getElementById("days-input");
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        buttons.forEach(b => b.classList.remove("selected"));
+        btn.classList.add("selected");
+        input.value = btn.dataset.value;
+      });
+    });
+
+    // フォーム送信前に選択されていなければ警告
+    document.getElementById("day-form").addEventListener("submit", e => {
+      if (!input.value) {
+        e.preventDefault();
+        alert("日数を選択してください");
+      }
+    });
+  </script>
+{% endblock %}
